@@ -15,7 +15,10 @@ import TextField from '@mui/material/TextField';
 
 function PredictionForm() {
     const navigate = useNavigate();
-    const [carrer, setCarrer] = React.useState('');
+    const [formValues, setFormValues] = useState({
+        carrer: '',
+        daysBeforeStart: 0
+    });
     const carrerOptions = [
         "Ing. Química",
         "Ing. de Sistemas",
@@ -34,13 +37,17 @@ function PredictionForm() {
     ];
 
     const handleChange = (event) => {
-        setCarrer(event.target.value);
+        const { name, value } = event.target;
+        setFormValues((prevValues) => ({
+        ...prevValues,
+        [name]: value,
+        }));
         
     };
-    function handleFormSubmit() {
-        console.log(carrer);
-        console.log(carrer);
-        navigate('/prediction');
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        console.log(formValues)
+        navigate('/prediction',{'state':formValues});
     }
     let sxInput = {my:2}
     return (
@@ -50,10 +57,13 @@ function PredictionForm() {
                     id="outlined-number"
                     label="¿Con cuantos días de anticipación te inscribiste o inscribiras?"
                     type="number"
+                    name='daysBeforeStart'
+                    value={formValues.daysBeforeStart}
+                    onChange={handleChange}
                 />
                 <FormControl fullWidth sx={sxInput}>
                     <InputLabel id="carrer-label">Carrera</InputLabel>
-                    <Select labelId="carrer-label" id="carrer" value={carrer} label="Carrera" onChange={handleChange}>
+                    <Select labelId="carrer-label" id="carrer" name={"carrer"} value={formValues.carrer} label="Carrera" onChange={handleChange}>
                         {
                             carrerOptions.map((c)=>{
                                 return (<MenuItem value={c}>{c}</MenuItem>);

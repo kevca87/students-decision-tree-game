@@ -13,11 +13,10 @@ typography: {
       fontWeight : 600,
       fontSize : 300
     },
-    // h2 : {
-    //     fontFamily : `"DM Sans", sans-serif`,
-    //     fontWeight : 600,
-    //     fontSize : 35
-    // },
+    h2 : {
+      fontWeight : 600,
+      fontSize : 100
+    },
     // h3 : {
     //     fontFamily : `"DM Sans", sans-serif`,
     //     fontWeight : 600,
