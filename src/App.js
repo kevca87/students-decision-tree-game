@@ -1,5 +1,6 @@
 import ProbabilityResult from "./Views/ProbabilityResult";
 import PredictionForm from "./Views/PredictionForm";
+import Title from "./Views/Presentation";
 
 import {
   BrowserRouter as Router,
@@ -13,6 +14,7 @@ function App() {
   return (
     <Router>
         <Routes>
+          <Route exact path="/title" element={<Title/>}></Route>
             <Route exact path="/" element={<PredictionForm/>}></Route>
             <Route path="/prediction" element={<ProbabilityResult/>}></Route>
         </Routes>

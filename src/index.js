@@ -11,7 +11,7 @@ typography: {
     fontSize: 16,
     h1 : {
       fontWeight : 600,
-      fontSize : 300
+      fontSize : 170
     },
     h2 : {
       fontWeight : 600,

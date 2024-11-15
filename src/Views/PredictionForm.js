@@ -12,12 +12,21 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 function PredictionForm() {
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         carrer: '',
-        daysBeforeStart: 0
+        daysBeforeStart: 0,
+        age:18
     });
     const carrerOptions = [
         "Ing. Química",
@@ -51,16 +60,30 @@ function PredictionForm() {
     }
     let sxInput = {my:2}
     return (
-        <Box>
+        <Box sx={{display:'flex',justifyContent: 'center'}}>
+            <Box sx={{width:0.70}}>
             <FormContainer title="Mis decisiones">
                 <TextField fullWidth
+                    sx={sxInput}
                     id="outlined-number"
-                    label="¿Con cuantos días de anticipación te inscribiste o inscribiras?"
+                    label="¿Con cuántos días de anticipación te inscribiste o inscribirás?"
                     type="number"
                     name='daysBeforeStart'
                     value={formValues.daysBeforeStart}
                     onChange={handleChange}
                 />
+                <TextField fullWidth
+                    sx={sxInput}
+                    id="outlined-age"
+                    label="¿Qué edad tienes?"
+                    type="number"
+                    name='age'
+                    value={formValues.age}
+                    onChange={handleChange}
+                />
+                <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth>
+                    <TimePicker label="¿A qué hora comienza tu clase?" sx={{width:1}}/>
+                </LocalizationProvider>
                 <FormControl fullWidth sx={sxInput}>
                     <InputLabel id="carrer-label">Carrera</InputLabel>
                     <Select labelId="carrer-label" id="carrer" name={"carrer"} value={formValues.carrer} label="Carrera" onChange={handleChange}>
@@ -71,12 +94,25 @@ function PredictionForm() {
                         }
                     </Select>
                 </FormControl>
+                <FormControl fullWidth sx={sxInput}>
+                <FormLabel id="demo-radio-buttons-group-label">¿Estás repitiendo la materia?</FormLabel>
+                    <RadioGroup
+                        row
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="no"
+                        name="radio-buttons-group"
+                    >
+                        <FormControlLabel value="si" control={<Radio />} label="Si" />
+                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                    </RadioGroup>
+                </FormControl>
                 <Box sx={{display: 'inline'}}>
                         <Button variant="contained" onClick={handleFormSubmit} disableElevation>
                         Predice mi futuro
                         </Button>
                 </Box>
             </FormContainer>
+        </Box>
         </Box>
     );
 }
